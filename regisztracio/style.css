@@ -1,0 +1,57 @@
+* {
+        box-sizing: border-box;
+}
+
+main{
+        width:90%; 
+        margin: 0 auto;
+}
+#hiba{
+        padding: 20px;
+        width: 90%;
+        margin: 10px auto;
+}
+
+form{
+        width: 30%;
+        margin: 10px auto;
+}
+form > label{
+        width: 20%;
+        margin: 20px;
+        display: inline-block;
+}
+
+input, option, select{
+        width: 60%;
+        margin: 5px;
+        padding: 5px;
+}
+
+input[type=submit], a {
+        text-align: center;
+        display: block;
+        background-color: #6ccca9;
+        border: none;
+        color: white;
+        padding: 10px 22px;
+        width: 90%;
+        margin: 2px auto;
+}
+#hiba > img {
+        width: 80%;
+}
+
+h1, h2 , ul{
+        text-align: center;
+        margin: 2px 0px 5px;
+}
+
+a {
+        text-decoration: none;
+        background-color: #4f7668;
+}
+ul {
+        list-style-type: none;
+}
+

@@ -1,0 +1,86 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "pizza",
+    "collectionId": "34cce954-49a3-4b22-af22-1b4dd45b2b8f",
+    "dateExported": "2024-05-26T21:49:36.340Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a7e67009-9b80-4ad7-930d-72ba8728d099",
+            "colId": "34cce954-49a3-4b22-af22-1b4dd45b2b8f",
+            "containerId": "",
+            "name": "localhost/regisztracio/api/category?nameU=Gizi&priceU=1000",
+            "url": "http://localhost/regisztracio/api/category",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-26T21:48:48.571Z",
+            "modified": "2024-05-26T21:48:48.571Z",
+            "headers": [
+                {
+                    "name": "header",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [
+                {
+                    "name": "nev",
+                    "value": "mogyi",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "ar",
+                    "value": "2000",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"nev\": \"mogyi\",\r\n  \"ar\": 500\r\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "91bb1bc5-dd10-4bdd-9f43-c238b30485fa",
+            "colId": "34cce954-49a3-4b22-af22-1b4dd45b2b8f",
+            "containerId": "",
+            "name": "localhost/regisztracio/api/category?nameU=Gizi&priceU=1000 Copy",
+            "url": "http://localhost/regisztracio/api/category/11",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-26T21:49:01.582Z",
+            "modified": "2024-05-26T21:49:28.256Z",
+            "headers": [
+                {
+                    "name": "header",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [
+                {
+                    "name": "nev",
+                    "value": "mogyi",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "ar",
+                    "value": "2000",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ]
+        }
+    ],
+    "ref": "A6AO-r3AmMO4j67U4GLxY7oWhby034XeUUhj30NRZien2qT8qviD5xQxYelQJ6jqP___fsAbj9ajkHFyytSyzA"
+}
