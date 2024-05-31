@@ -1,27 +1,18 @@
 <?php
-/* header('Content-Type: application/json'); */
+header('Content-Type: application/json; charset=utf-8');
 include_once 'class-user.php';
 session_start();
-/* if (!empty($_SESSION["kategoria"])) {
-    header("Location: ../category.php");
-} */
-header('Content-Type: application/json; charset=utf-8');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
-/* $requestUri = strtok($_SERVER['REQUEST_URI'], '?'); //kérdőjel nélkül */
-
-//echo "$requestUri";
 
 // Útvonal és metódus kezelés
 if ($requestMethod == 'GET' && preg_match('/\/regisztracio\/api\/category\/(\d+)/', $requestUri, $matches)) {
     $categoryId = $matches[1];
-    //echo $matches[1];
     getCategory($categoryId);
 } elseif ($requestMethod == 'GET' && $requestUri == '/regisztracio/api/category') {
     getAllCategory();
-}
-elseif ($requestMethod == 'POST' && $requestUri == '/regisztracio/api/category') {
+} elseif ($requestMethod == 'POST' && $requestUri == '/regisztracio/api/category') {
     createCategory();
 } elseif ($requestMethod == 'PUT' && preg_match('/\/regisztracio\/api\/category\/(\d+)/', $requestUri, $matches)) {
     $categoryId = $matches[1];
@@ -32,7 +23,7 @@ elseif ($requestMethod == 'POST' && $requestUri == '/regisztracio/api/category')
 } else {
     http_response_code(404);
     echo json_encode(['error' => 'Route not found']);
-    }
+}
 
 // Függvények
 
@@ -41,9 +32,10 @@ function getCategory($id) {
     $category = $felh->megjelenitLista("kategoria", "nev", "ar", $id); 
     if ($category != null) {
         echo json_encode($category);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'Nincs ilyen rekord']);
     }
-    else
-        echo "Nincs ilyen rekord";
 }
 
 function getAllCategory() {
@@ -51,9 +43,10 @@ function getAllCategory() {
     $category = $felh->megjelenitMindLista("kategoria"); 
     if ($category != null) {
         echo json_encode($category);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'Nincs ilyen rekord']);
     }
-    else
-        echo "Nincs ilyen rekord";
 }
 
 function createCategory() {
@@ -61,26 +54,27 @@ function createCategory() {
     $data = json_decode(file_get_contents('php://input'), true);
     $nev = $data['nev'] ?? null;
     $ar = $data['ar'] ?? null;
-    // Validate the input data
+
     if ($nev === null || $ar === null) {
-        if (isset($_POST["priceU"])){
+        if (isset($_POST["priceU"])) {
             try {
                 $felh->beszur("kategoria", $_POST["priceU"], $_POST["nameU"]);
-                echo "Sikeres beszúrás";
-            } catch (\Throwable $th) {
-                echo "Duplikált beszúrás";
+                echo json_encode(['message' => 'Sikeres beszúrás']);
+            } catch (Throwable $th) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Duplikált beszúrás']);
             }
-            
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Nem megfelelő input']);
         }
-        else
-            echo json_encode(['message' => 'Nem megfelelő input']);
-    }
-    else{
+    } else {
         try {
             $felh->beszur("kategoria", $ar, $nev);
-        echo json_encode(['message' => 'Category created', 'nev' => $nev, 'ar' => $ar]);
-        } catch (\Throwable $th) {
-            echo "Duplikált beszúrás";
+            echo json_encode(['message' => 'Category created', 'nev' => $nev, 'ar' => $ar]);
+        } catch (Throwable $th) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Duplikált beszúrás']);
         }
     }
 }
@@ -93,3 +87,4 @@ function updateCategory($id) {
 function deleteCategory($id) {
     echo json_encode(['message' => 'Category deleted', 'id' => $id]);
 }
+?>
